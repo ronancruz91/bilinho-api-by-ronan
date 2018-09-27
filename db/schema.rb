@@ -10,12 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_164322) do
+ActiveRecord::Schema.define(version: 2018_09_27_190554) do
+
+  create_table "alunos", force: :cascade do |t|
+    t.text "nome"
+    t.text "cpf"
+    t.date "data_nascimento"
+    t.integer "telefone"
+    t.text "genero"
+    t.text "meio_pagamento"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "instituicaos", force: :cascade do |t|
     t.text "nome"
     t.text "cnpj"
     t.text "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matriculas", force: :cascade do |t|
+    t.decimal "valor_total"
+    t.integer "quantidade_faturas"
+    t.integer "dia_vencimento_faturas"
+    t.text "nome_curso"
+    t.integer "aluno_id"
+    t.integer "instituicao_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

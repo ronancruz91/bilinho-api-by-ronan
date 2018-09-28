@@ -2,27 +2,29 @@ module Api
 	class AlunosController < ApplicationController
 		def index
 			alunos = Aluno.order('created_at DESC');
-			render json: {
+			render ResponseHelper.new({
 					status: 'Sucesso',
 					message: 'Alunos carregados',
 					data: alunos
-				}, status: :ok
+					}).success
 		end
 
 		def create
-			aluno = Aluno.new(aluno_params)
-			if aluno.save
-				render json: {
-                                                status: 'Sucesso',
-                                                message: 'Aluno salvo',
-                                                data: aluno
-                                        }, status: :ok
-                        else
-                                render json: {
-                                                status: 'Erro',
-                                                message: 'Aluno não salvo'
-                                        }, status: :bad_request
-                        end
+			begin
+				aluno = Aluno.new(aluno_params)
+				aluno.save!
+			rescue ActiveRecord::ActiveRecordError => invalid
+                        	render ResponseHelper.new({
+						status: 'Erro',
+                                        	message: invalid.record.errors
+                                        	}).bad_request
+			else
+				render ResponseHelper.new({
+					status: 'Sucesso',
+                                        message: 'Aluno salvo',
+                                        data: aluno
+                                        }).success
+			end
 		end
 
 		private

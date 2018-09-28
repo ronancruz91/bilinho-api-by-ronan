@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_190554) do
+ActiveRecord::Schema.define(version: 2018_09_28_135151) do
 
   create_table "alunos", force: :cascade do |t|
     t.text "nome"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2018_09_27_190554) do
     t.text "meio_pagamento"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "faturas", force: :cascade do |t|
+    t.decimal "valor"
+    t.date "data_vencimento"
+    t.text "status", default: "Aberta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "matricula_id"
   end
 
   create_table "instituicaos", force: :cascade do |t|
@@ -36,10 +45,10 @@ ActiveRecord::Schema.define(version: 2018_09_27_190554) do
     t.integer "quantidade_faturas"
     t.integer "dia_vencimento_faturas"
     t.text "nome_curso"
-    t.integer "aluno_id"
-    t.integer "instituicao_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "aluno_id"
+    t.integer "instituicao_id"
   end
 
 end

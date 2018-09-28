@@ -5,13 +5,9 @@ one:
   quantidade_faturas: 1
   dia_vencimento_faturas: 1
   nome_curso: MyText
-  aluno_id: 1
-  instituicao_id: 1
 
 two:
   valor_total: 9.99
   quantidade_faturas: 1
   dia_vencimento_faturas: 1
   nome_curso: MyText
-  aluno_id: 1
-  instituicao_id: 1

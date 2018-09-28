@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valor: 9.99
+  data_vencimento: 2018-09-28
+  status: MyText
+
+two:
+  valor: 9.99
+  data_vencimento: 2018-09-28
+  status: MyText

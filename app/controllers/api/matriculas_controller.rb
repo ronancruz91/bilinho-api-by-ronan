@@ -2,7 +2,7 @@ module Api
 	class MatriculasController < ApplicationController
 
 		def index
-			matriculas = Matricula.order('created_at DESC');
+			matriculas = Matricula.joins(:aluno);
 			render json: {
                                         status: 'Sucesso',
                                         message: 'Matriculas carregadas',
@@ -12,7 +12,10 @@ module Api
 
 		def create
 			matricula = Matricula.new(matricula_params)
-			matricula.save
+			result = matricula.save
+			render json: {
+					data: result
+				}, status: :ok
 		end
 		
 		private

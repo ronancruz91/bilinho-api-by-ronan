@@ -1,27 +1,31 @@
 module Api
 	class InstituicoesController < ApplicationController
+		# Lista todas as instituições a partir de uma requisição GET
 		def index
 			instituicoes = Instituicao.order('created_at DESC');
-			render json: {
-					status: 'Sucesso',
-					message: 'Instituições carregadas',
-					data: instituicoes
-				}, status: :ok
+			render ResponseHelper.new({
+						status: 'Sucesso',
+						message: 'Instituições carregadas',
+						data: instituicoes
+						}).success
 		end
 
+		# cria uma nova instituição a partir de uma requisição POST
 		def create
-			instituicao = Instituicao.new(instituicao_params)
-			if instituicao.save
-				render json: {
-						status: 'Sucesso',
-						message: 'Instituição salva',
-						data: instituicao
-					}, status: :ok
-			else
-				render json: {
+			begin
+				instituicao = Instituicao.new(instituicao_params)
+				instituicao.save!
+			rescue ActiveRecord::ActiveRecordError => invalid
+                                render ResponseHelper.new({
                                                 status: 'Erro',
-                                                message: 'Instituição não salva'
-                                        }, status: :bad_request
+                                                message: invalid.record.errors
+                                                }).bad_request
+                        else
+				render ResponseHelper.new({
+							status: 'Sucesso',
+							message: 'Instituição salva',
+							data: instituicao
+							})..success
 			end
 		end
 

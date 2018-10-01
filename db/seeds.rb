@@ -12,3 +12,14 @@
 		cnpj: Faker::IDNumber.valid
 	})
 end
+
+50.times do
+	Aluno.create({
+		nome: Faker::Name.name_with_middle,
+		cpf: Faker::Number.number(10),
+		data_nascimento: Faker::Date.birthday(18, 65),
+		telefone: Faker::Number.number(10),
+		genero: ['M','F'].sample,
+		meio_pagamento: ['Boleto','Cartão'].sample
+	})
+end

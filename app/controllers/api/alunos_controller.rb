@@ -1,5 +1,6 @@
 module Api
 	class AlunosController < ApplicationController
+		# listar todos os alunos cadastrados a partir de uma requisição GET
 		def index
 			alunos = Aluno.order('created_at DESC');
 			render ResponseHelper.new({
@@ -9,6 +10,7 @@ module Api
 					}).success
 		end
 
+		# cria um novo aluno a partir de uma requisição POST
 		def create
 			begin
 				aluno = Aluno.new(aluno_params)
